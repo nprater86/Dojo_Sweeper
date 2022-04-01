@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', monospace;
+}
+
+.game {
+    min-width: 370px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+    
+#the-dojo {
+    width: 320px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+    
+.tatami {
+    background-color: wheat;
+    height: 32px;
+    width: 32px;
+    border: 2px solid #ccc;
+    border-right: 2px solid #999;
+    border-bottom: 2px solid #999;
+}
+    
+.tatami:active {
+    border: 2px solid #999;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+ol {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    margin: 0 auto;
+    gap: 25px;
+}
