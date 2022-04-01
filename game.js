@@ -1,13 +1,24 @@
 var gridLength = 10;
 
-var theDojo = [];
+var theDojo = [
+    [0,0,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+];
 
-for (var i = 0; i < gridLength; i++){
-    theDojo.push([]);
-    for (var j = 0; j < gridLength; j++){
-        theDojo[i].push(Math.floor(Math.random()*2));
-    }
-}
+// for (var i = 0; i < gridLength; i++){
+//     theDojo.push([]);
+//     for (var j = 0; j < gridLength; j++){
+//         theDojo[i].push(Math.floor(Math.random()*2));
+//     }
+// }
 
 var theDojoSums = [];
 
@@ -15,6 +26,16 @@ for(var i = 0; i < theDojo.length; i++){
     theDojoSums.push([]);
     for (var j = 0; j < theDojo[i].length; j++){
         theDojoSums[i].push('');
+    }
+}
+
+var winSum = 0;
+
+for (var i = 0; i < gridLength; i++){
+    for (var j = 0; j < gridLength; j++){
+        if (theDojo[i][j] === 0){
+            winSum++;
+        }
     }
 }
 
@@ -36,6 +57,9 @@ function render(theDojo, theDojoSums) {
 //        Use i and j as the indexes to check theDojo.
 function howMany(i, j, element) {
     console.log({i, j});
+    if (theDojo[i][j] === 0 && theDojoSums[i][j] === ''){
+        winSum--;
+    }
     
     if(theDojo[i][j] === 0){
         var sum = 0;
@@ -52,8 +76,13 @@ function howMany(i, j, element) {
         theDojoSums[i][j] = sum;
         dojoDiv.innerHTML = render(theDojo,theDojoSums);
     } else {
+        alert('You lose! Good day, sir!');
         dojoDiv.innerHTML = renderEndScreen();
     }
+    
+
+    console.log(winSum);
+    checkWin();
 }
     
 // BONUS CHALLENGES
@@ -97,7 +126,11 @@ function renderEndScreen() { //displays the location of all ninjas and changes t
 function reload() { //resets theDojo and theDojoSums back to empty, then repopulates them using the same code above
     theDojo = [];
     theDojoSums = [];
+    winSum = 0;
+
+
     event.preventDefault();
+
     for (var i = 0; i < gridLength; i++){
         theDojo.push([]);
         for (var j = 0; j < gridLength; j++){
@@ -111,6 +144,15 @@ function reload() { //resets theDojo and theDojoSums back to empty, then repopul
             theDojoSums[i].push('');
         }
     }
+
+    for (var i = 0; i < gridLength; i++){
+        for (var j = 0; j < gridLength; j++){
+            if (theDojo[i][j] === 0){
+                winSum++;
+            }
+        }
+    }
+
     console.table(theDojo);
     dojoDiv.innerHTML = render(theDojo, theDojoSums); 
 }
@@ -124,4 +166,12 @@ function flag(i, j, element){
         theDojoSums[i][j] = '';
     }
     dojoDiv.innerHTML = render(theDojo,theDojoSums);
+}
+
+//check win
+function checkWin() {
+    if (winSum === 0){
+        alert('You win!');
+        dojoDiv.innerHTML = renderEndScreen();
+    }
 }
